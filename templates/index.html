@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <h1>Gestión de Inventario</h1>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Iniciar Sesión</a>
+            <a href="{{ url_for('register') }}" class="btn btn-secondary">Registrarse</a>
+        {% endif %}
+    </header>
+    <main class="container my-4">
+        {% if current_user.is_authenticated %}
+            <h2>Bienvenido, {{ current_user.username }}</h2>
+            
+            <table id="productos-table" class="table table-bordered">
+                
+                <thead class="thead-light">
+                    <h2>Lista de Productos</h2>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Código</th>
+                        <th>Precio Costo</th>
+                        <th>Precio Venta</th>
+                        <th>Stock</th>
+                        <th>Margen Bruto</th>
+                        <th>Margen Neto (%)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas de productos serán añadidas por JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="producto-form" class="bg-white p-3 rounded shadow-sm">
+                        <h2>Agregar/Editar Producto</h2>
+                        <input type="hidden" id="producto-id">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="codigo_barra">Código:</label>
+                            <input type="text" id="codigo_barra" name="codigo_barra" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_costo">Precio de Costo:</label>
+                            <input type="number" id="precio_costo" name="precio_costo" step="0.01" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_venta">Precio de Venta:</label>
+                            <input type="number" id="precio_venta" name="precio_venta" step="0.01" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock:</label>
+                            <input type="number" id="stock" name="stock" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <form id="venta-form" class="bg-white p-3 rounded shadow-sm">
+                        <h2>Registrar Venta</h2>
+                        <div class="form-group">
+                            <label for="venta-codigo-barra">Código:</label>
+                            <input type="text" id="venta-codigo-barra" name="venta-codigo-barra" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" id="cantidad" name="cantidad" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar Venta</button>
+                    </form>
+
+                    <form action="/reporte" target="_blank" class="bg-white p-3 rounded shadow-sm mt-3">
+                        <h2>Generar Reporte</h2>
+                        <button type="button" class="btn btn-secondary" onclick="window.open('/reporte', '_blank')">Generar Reporte</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <h2>Por favor, <a href="{{ url_for('login') }}">inicie sesión</a> o <a href="{{ url_for('register') }}">regístrese</a> para continuar.</h2>
+        {% endif %}
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

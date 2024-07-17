@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <h1>Dashboard</h1>
+    </header>
+    <main class="container my-4">
+        <h2>Bienvenido al Panel de Control</h2>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Ir a la Página Principal</a>
+    </main>
+    <script src="https://code
