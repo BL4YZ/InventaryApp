@@ -17,30 +17,35 @@
             <a href="{{ url_for('register') }}" class="btn btn-secondary">Registrarse</a>
         {% endif %}
     </header>
-    <main class="container my-4">
-        {% if current_user.is_authenticated %}
-            <h2>Bienvenido, {{ current_user.username }}</h2>
-            
-            <table id="productos-table" class="table table-bordered">
-                
-                <thead class="thead-light">
-                    <h2>Lista de Productos</h2>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Código</th>
-                        <th>Precio Costo</th>
-                        <th>Precio Venta</th>
-                        <th>Stock</th>
-                        <th>Margen Bruto</th>
-                        <th>Margen Neto (%)</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Filas de productos serán añadidas por JavaScript -->
-                </tbody>
-            </table>
-
+    {% if current_user.is_authenticated %}
+        <div class="container my-4">
+            <div class="welcome-section">
+                <h2>Bienvenido, {{ current_user.username }}</h2>
+            </div>
+        </div>
+        <div class="container my-4">
+            <div class="products-section">
+                <h2>Lista de Productos</h2>
+                <div class="table-section">
+                    <table id="productos-table" class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Código</th>
+                                <th>Precio Costo</th>
+                                <th>Precio Venta</th>
+                                <th>Stock</th>
+                                <th>Margen Bruto</th>
+                                <th>Margen Neto (%)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filas de productos serán añadidas por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <form id="producto-form" class="bg-white p-3 rounded shadow-sm">
@@ -90,10 +95,12 @@
                     </form>
                 </div>
             </div>
-        {% else %}
+        </div>
+    {% else %}
+        <div class="container my-4">
             <h2>Por favor, <a href="{{ url_for('login') }}">inicie sesión</a> o <a href="{{ url_for('register') }}">regístrese</a> para continuar.</h2>
-        {% endif %}
-    </main>
+        </div>
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

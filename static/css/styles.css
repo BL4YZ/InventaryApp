@@ -86,3 +86,15 @@ pre {
     border-radius: 4px;
     white-space: pre-wrap;
 }
+
+.welcome-section {
+    margin-bottom: 20px; /* Ajusta este valor según sea necesario */
+}
+
+.products-section {
+    margin-bottom: 20px; /* Ajusta este valor según sea necesario */
+}
+
+.table-section {
+    margin-bottom: 20px; /* Ajusta este valor según sea necesario */
+}
